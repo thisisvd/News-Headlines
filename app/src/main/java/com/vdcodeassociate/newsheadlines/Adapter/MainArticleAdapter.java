@@ -24,6 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.vdcodeassociate.newsheadlines.R;
 import com.vdcodeassociate.newsheadlines.Model.Articles;
+import com.vdcodeassociate.newsheadlines.utils.Utils;
 
 import java.util.List;
 
@@ -57,13 +58,13 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        viewHolder.progressBar.setVisibility(View.GONE);
+//                        viewHolder.progressBar.setVisibility(View.GONE);
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
-                        viewHolder.progressBar.setVisibility(View.GONE);
+//                        viewHolder.progressBar.setVisibility(View.GONE);
                         return false;
                     }
 
@@ -75,15 +76,18 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
         if (!TextUtils.isEmpty(articleModel.getTitle())) {
             viewHolder.title.setText(articleModel.getTitle());
         }
-        if (!TextUtils.isEmpty(articleModel.getDescription())) {
-            viewHolder.description.setText(articleModel.getDescription());
-        }
-        if (!TextUtils.isEmpty(articleModel.getAuthor())) {
-            viewHolder.author.setText(articleModel.getAuthor());
-        }
+//        if (!TextUtils.isEmpty(articleModel.getDescription())) {
+//            viewHolder.description.setText(articleModel.getDescription());
+//        }
+//        if (!TextUtils.isEmpty(articleModel.getAuthor())) {
+//            viewHolder.author.setText(articleModel.getAuthor());
+//        }
         if (!TextUtils.isEmpty(articleModel.getPublishedAt())) {
             viewHolder.publishedAt.setText(articleModel.getPublishedAt());
         }
+
+        viewHolder.date.setText("  -  "+ Utils.DateToTimeFormat(articleModel.getPublishedAt()));
+        viewHolder.publishedAt.setText(Utils.DateFormat(articleModel.getPublishedAt()));
 
     }
 
@@ -96,6 +100,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
         private TextView title;
         private TextView description;
         private TextView author;
+        private TextView date;
         private TextView publishedAt;
         private ImageView imageView;
         private ProgressBar progressBar;
@@ -104,12 +109,12 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
             super(view);
 
             title = view.findViewById(R.id.news_title);
-            description = view.findViewById(R.id.news_description);
-            author = view.findViewById(R.id.news_author);
+//            description = view.findViewById(R.id.news_description);
+//            author = view.findViewById(R.id.news_author);
+            date = view.findViewById(R.id.news_date);
             publishedAt = view.findViewById(R.id.news_publishedAt);
             imageView = view.findViewById(R.id.news_image);
-            imageView = view.findViewById(R.id.news_image);
-            progressBar = view.findViewById(R.id.progress_bar1);
+//            progressBar = view.findViewById(R.id.progress_bar1);
 
         }
     }
