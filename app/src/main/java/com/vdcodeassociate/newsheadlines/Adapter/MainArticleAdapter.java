@@ -2,11 +2,13 @@ package com.vdcodeassociate.newsheadlines.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,16 +22,16 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
-import com.vdcodeassociate.newshead2.R;
-import com.vdcodeassociate.newshead2.model.Article;
+import com.vdcodeassociate.newsheadlines.R;
+import com.vdcodeassociate.newsheadlines.Model.Articles;
 
 import java.util.List;
 
 public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.ViewHolder> {
-    private List<Article> articleArrayList;
+    private List<Articles> articleArrayList;
     private Context context;
 
-    public MainArticleAdapter(List<Article> articleArrayList, Context context) {
+    public MainArticleAdapter(List<Articles> articleArrayList, Context context) {
         this.articleArrayList = articleArrayList;
         this.context = context;
     }
@@ -42,8 +44,9 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        final Article articleModel = articleArrayList.get(position);
+        final Articles articleModel = articleArrayList.get(position);
 
+        // Putting Image in ImageView
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.centerCrop();
@@ -68,6 +71,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(viewHolder.imageView);
 
+        // Putting Text in All TextViews
         if (!TextUtils.isEmpty(articleModel.getTitle())) {
             viewHolder.title.setText(articleModel.getTitle());
         }
