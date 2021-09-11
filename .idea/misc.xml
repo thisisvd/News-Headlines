@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/admin/Music/AndroidProject(2021)/MinorProject/News-Headlines/app/src/main/res/drawable/back_yellow_button.xml" value="0.19072164948453607" />
         <entry key="..\:/Users/admin/Music/AndroidProject(2021)/MinorProject/News-Headlines/app/src/main/res/drawable/shadow_image_file.xml" value="0.2846153846153846" />
+        <entry key="..\:/Users/admin/Music/AndroidProject(2021)/MinorProject/News-Headlines/app/src/main/res/layout/activity_expand_news.xml" value="0.22" />
         <entry key="..\:/Users/admin/Music/AndroidProject(2021)/MinorProject/News-Headlines/app/src/main/res/layout/activity_main.xml" value="0.26902173913043476" />
         <entry key="..\:/Users/admin/Music/AndroidProject(2021)/MinorProject/News-Headlines/app/src/main/res/layout/news_card_view.xml" value="0.2" />
       </map>

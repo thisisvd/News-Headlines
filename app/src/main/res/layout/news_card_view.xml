@@ -51,7 +51,6 @@
                 android:id="@+id/news_publishedAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
@@ -60,10 +59,11 @@
                 android:fontFamily="sans-serif-medium"
                 android:text="September 8, 2021"
                 android:textColor="@color/black"
+                android:textSize="11sp"
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/news_date"
+                android:id="@+id/news_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

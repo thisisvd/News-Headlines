@@ -28,13 +28,17 @@ import com.vdcodeassociate.newsheadlines.utils.Utils;
 
 import java.util.List;
 
-public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.ViewHolder> {
+public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.ViewHolder>{
+
     private List<Articles> articleArrayList;
     private Context context;
 
-    public MainArticleAdapter(List<Articles> articleArrayList, Context context) {
+    private RecyclerViewClickListener listener;
+
+    public MainArticleAdapter(List<Articles> articleArrayList, Context context, RecyclerViewClickListener listener) {
         this.articleArrayList = articleArrayList;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
@@ -86,7 +90,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
             viewHolder.publishedAt.setText(articleModel.getPublishedAt());
         }
 
-        viewHolder.date.setText("  -  "+ Utils.DateToTimeFormat(articleModel.getPublishedAt()));
+        viewHolder.news_time.setText("  -  "+ Utils.DateToTimeFormat(articleModel.getPublishedAt()));
         viewHolder.publishedAt.setText(Utils.DateFormat(articleModel.getPublishedAt()));
 
     }
@@ -96,11 +100,16 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
         return articleArrayList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public interface RecyclerViewClickListener{
+        void onClick(View view, int position);
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         private TextView title;
         private TextView description;
         private TextView author;
-        private TextView date;
+        private TextView news_time;
         private TextView publishedAt;
         private ImageView imageView;
         private ProgressBar progressBar;
@@ -111,11 +120,17 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
             title = view.findViewById(R.id.news_title);
 //            description = view.findViewById(R.id.news_description);
 //            author = view.findViewById(R.id.news_author);
-            date = view.findViewById(R.id.news_date);
+            news_time = view.findViewById(R.id.news_time);
             publishedAt = view.findViewById(R.id.news_publishedAt);
             imageView = view.findViewById(R.id.news_image);
 //            progressBar = view.findViewById(R.id.progress_bar1);
 
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getAdapterPosition());
         }
     }
 
