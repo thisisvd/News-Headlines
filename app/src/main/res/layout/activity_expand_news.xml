@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ExpandNews">
+    tools:context=".ExpandNews"
+    android:scrollbarThumbVertical="@null">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         <ImageView
             android:id="@+id/shadow_image"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="match_parent"
             android:layout_alignBottom="@+id/expand_image"
             android:src="@drawable/shadow_image_file" />
 
