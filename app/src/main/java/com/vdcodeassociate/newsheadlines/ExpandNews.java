@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.material.transition.MaterialContainerTransform;
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 import com.vdcodeassociate.newsheadlines.Model.Articles;
 
 import java.util.ArrayList;
@@ -41,6 +44,8 @@ public class ExpandNews extends AppCompatActivity {
         setContentView(R.layout.activity_expand_news);
 
         init();
+
+        configFade();
 
         Intent intent = getIntent();
 
@@ -76,6 +81,17 @@ public class ExpandNews extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
 
+    }
+
+    private void configFade() {
+        Fade fade = new Fade();
+        View view = getWindow().getDecorView();
+        fade.excludeTarget(view.findViewById(R.id.action_bar_container),true);
+        fade.excludeTarget(android.R.id.statusBarBackground,true);
+        fade.excludeTarget(android.R.id.navigationBarBackground,true);
+
+        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(fade);
     }
 
     private void init() {

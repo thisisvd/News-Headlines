@@ -80,18 +80,14 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
         if (!TextUtils.isEmpty(articleModel.getTitle())) {
             viewHolder.title.setText(articleModel.getTitle());
         }
-//        if (!TextUtils.isEmpty(articleModel.getDescription())) {
-//            viewHolder.description.setText(articleModel.getDescription());
-//        }
-//        if (!TextUtils.isEmpty(articleModel.getAuthor())) {
-//            viewHolder.author.setText(articleModel.getAuthor());
-//        }
+
         if (!TextUtils.isEmpty(articleModel.getPublishedAt())) {
             viewHolder.publishedAt.setText(articleModel.getPublishedAt());
         }
 
         viewHolder.news_time.setText("  -  "+ Utils.DateToTimeFormat(articleModel.getPublishedAt()));
         viewHolder.publishedAt.setText(Utils.DateFormat(articleModel.getPublishedAt()));
+
 
     }
 
@@ -101,7 +97,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
     }
 
     public interface RecyclerViewClickListener{
-        void onClick(View view, int position);
+        void onClick(View view, int position,ImageView imageView);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -130,7 +126,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
 
         @Override
         public void onClick(View v) {
-            listener.onClick(v,getAdapterPosition());
+            listener.onClick(v,getAdapterPosition(),imageView);
         }
     }
 

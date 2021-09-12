@@ -23,7 +23,8 @@
             android:layout_height="222dp"
             android:scaleType="centerCrop"
             android:src="@drawable/back_yellow_button"
-            tools:ignore="UnusedAttribute" />
+            tools:ignore="UnusedAttribute"
+            android:transitionName="image_transaction"/>
 
         <ImageView
             android:id="@+id/shadow_image"

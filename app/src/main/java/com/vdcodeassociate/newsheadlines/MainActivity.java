@@ -1,15 +1,20 @@
 package com.vdcodeassociate.newsheadlines;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback;
 import com.vdcodeassociate.newsheadlines.Adapter.MainArticleAdapter;
 import com.vdcodeassociate.newsheadlines.Model.Articles;
 import com.vdcodeassociate.newsheadlines.Model.ResponseModel;
@@ -32,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private MainArticleAdapter.RecyclerViewClickListener listener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +44,27 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
+       configFade();
+
         setUpRetrofit();
 
+    }
+
+    private void configFade() {
+        Fade fade = new Fade();
+        View view = getWindow().getDecorView();
+        fade.excludeTarget(view.findViewById(R.id.action_bar_container),true);
+        fade.excludeTarget(android.R.id.statusBarBackground,true);
+        fade.excludeTarget(android.R.id.navigationBarBackground,true);
+
+        getWindow().setEnterTransition(fade);
+        getWindow().setExitTransition(fade);
     }
 
     private void setOnClickListener(List<Articles> articlesList) {
         listener = new MainArticleAdapter.RecyclerViewClickListener() {
             @Override
-            public void onClick(View view, int position) {
+            public void onClick(View view, int position, ImageView imageView) {
                 Intent intent = new Intent(getApplicationContext(), ExpandNews.class);
                 intent.putExtra("title",articlesList.get(position).getTitle());
                 intent.putExtra("description",articlesList.get(position).getDescription());
@@ -58,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("publishedAt",articlesList.get(position).getPublishedAt());
                 intent.putExtra("imageURL",articlesList.get(position).getUrlToImage());
                 intent.putExtra("url",articlesList.get(position).getUrl());
-                startActivity(intent);
+
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        MainActivity.this, imageView, ViewCompat.getTransitionName(imageView));
+                startActivity(intent,optionsCompat.toBundle());
             }
         };
     }
