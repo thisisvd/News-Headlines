@@ -103,23 +103,17 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView title;
-        private TextView description;
-        private TextView author;
         private TextView news_time;
         private TextView publishedAt;
         private ImageView imageView;
-        private ProgressBar progressBar;
 
         ViewHolder(View view) {
             super(view);
 
             title = view.findViewById(R.id.news_title);
-//            description = view.findViewById(R.id.news_description);
-//            author = view.findViewById(R.id.news_author);
             news_time = view.findViewById(R.id.news_time);
             publishedAt = view.findViewById(R.id.news_publishedAt);
             imageView = view.findViewById(R.id.news_image);
-//            progressBar = view.findViewById(R.id.progress_bar1);
 
             view.setOnClickListener(this);
         }

@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
 
-       configFade();
+        configFade();
 
         setUpRetrofit();
 
@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private void configFade() {
         Fade fade = new Fade();
         View view = getWindow().getDecorView();
-        fade.excludeTarget(view.findViewById(R.id.action_bar_container),true);
-        fade.excludeTarget(android.R.id.statusBarBackground,true);
-        fade.excludeTarget(android.R.id.navigationBarBackground,true);
+        fade.excludeTarget(view.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
 
         getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(fade);
@@ -66,19 +66,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view, int position, ImageView imageView) {
                 Intent intent = new Intent(getApplicationContext(), ExpandNews.class);
-                intent.putExtra("title",articlesList.get(position).getTitle());
-                intent.putExtra("description",articlesList.get(position).getDescription());
-                intent.putExtra("content",articlesList.get(position).getContent());
-                intent.putExtra("author",articlesList.get(position).getAuthor());
-                intent.putExtra("source",articlesList.get(position).getSource().getName());
-                intent.putExtra("time",articlesList.get(position).getPublishedAt());
-                intent.putExtra("publishedAt",articlesList.get(position).getPublishedAt());
-                intent.putExtra("imageURL",articlesList.get(position).getUrlToImage());
-                intent.putExtra("url",articlesList.get(position).getUrl());
+                intent.putExtra("title", articlesList.get(position).getTitle());
+                intent.putExtra("description", articlesList.get(position).getDescription());
+                intent.putExtra("content", articlesList.get(position).getContent());
+                intent.putExtra("author", articlesList.get(position).getAuthor());
+                intent.putExtra("source", articlesList.get(position).getSource().getName());
+                intent.putExtra("time", articlesList.get(position).getPublishedAt());
+                intent.putExtra("publishedAt", articlesList.get(position).getPublishedAt());
+                intent.putExtra("imageURL", articlesList.get(position).getUrlToImage());
+                intent.putExtra("url", articlesList.get(position).getUrl());
 
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         MainActivity.this, imageView, ViewCompat.getTransitionName(imageView));
-                startActivity(intent,optionsCompat.toBundle());
+                startActivity(intent, optionsCompat.toBundle());
             }
         };
     }

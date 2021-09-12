@@ -107,7 +107,9 @@ public class ExpandNews extends AppCompatActivity {
 
     public void goToWebView(View view) {
 
-        Toast.makeText(getApplicationContext(), "Click here to read more article > > >", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),WebviewActivity.class);
+        intent.putExtra("url",url);
+        startActivity(intent);
 
     }
 

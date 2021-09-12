@@ -170,16 +170,16 @@ billionaires and adoption by mainstream
 institutions, not to mention …"
         android:textColor="@color/black" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#F5F55F"
+        android:backgroundTint="#ADF3F3F3"
         android:layout_gravity="center_horizontal"
         android:text="Click here to read more article > > >"
-        android:layout_marginTop="30sp"
+        android:layout_marginTop="35sp"
         android:textColor="#FF2414"
         android:onClick="goToWebView"
-        android:textSize="13sp"
+        android:textSize="18sp"
         android:fontFamily="@font/abril_fatface"/>
 
 </LinearLayout>
