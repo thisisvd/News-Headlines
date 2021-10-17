@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("url", articlesList.get(position).getUrl());
 
                 ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        MainActivity.this, imageView, ViewCompat.getTransitionName(imageView));
+                        MainActivity.this,imageView, ViewCompat.getTransitionName(imageView));
                 startActivity(intent, optionsCompat.toBundle());
             }
         };

@@ -88,7 +88,6 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
         viewHolder.news_time.setText("  -  "+ Utils.DateToTimeFormat(articleModel.getPublishedAt()));
         viewHolder.publishedAt.setText(Utils.DateFormat(articleModel.getPublishedAt()));
 
-
     }
 
     @Override
@@ -97,7 +96,7 @@ public class MainArticleAdapter extends RecyclerView.Adapter<MainArticleAdapter.
     }
 
     public interface RecyclerViewClickListener{
-        void onClick(View view, int position,ImageView imageView);
+        void onClick(View view, int position, ImageView imageView);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
