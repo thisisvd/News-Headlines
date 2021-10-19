@@ -12,14 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsHeadlines">
         <activity
-            android:name=".WebviewActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ExpandNews"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".kotlin.ui.NewsActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

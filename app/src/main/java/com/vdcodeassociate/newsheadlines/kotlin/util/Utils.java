@@ -1,4 +1,4 @@
-package com.vdcodeassociate.newsheadlines.utils;
+package com.vdcodeassociate.newsheadlines.kotlin.util;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;

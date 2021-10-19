@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_nav_bar"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.SavedFragment"
+        android:label="SavedFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.SearchFragment"
+        android:label="SearchFragment" />
+</navigation>
