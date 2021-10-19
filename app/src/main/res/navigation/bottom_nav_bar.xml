@@ -7,13 +7,33 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.SavedFragment"
-        android:label="SavedFragment" />
+        android:label="SavedFragment" >
+        <action
+            android:id="@+id/action_savedFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.vdcodeassociate.newsheadlines.kotlin.ui.fragments.WebViewFragment"
+        android:label="WebViewFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.vdcodeassociate.newsheadlines.kotlin.model.Article" />
+    </fragment>
 </navigation>

@@ -64,6 +64,11 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewModel>() {
             news_title.text = article.title
             news_publishedAt.text = Utils.DateFormat(article.publishedAt)
             news_time.text = Utils.DateFormat(article.publishedAt)
+
+            setOnClickListener {
+                onItemClickListener?.let { it(article) }
+            }
+
         }
     }
 
@@ -71,5 +76,10 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewModel>() {
         return differ.currentList.size
     }
 
+    private var onItemClickListener: ((Article) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Article) -> Unit) {
+        onItemClickListener = listener
+    }
 
 }

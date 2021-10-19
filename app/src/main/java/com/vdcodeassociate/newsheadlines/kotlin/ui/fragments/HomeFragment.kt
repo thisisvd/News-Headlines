@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vdcodeassociate.newsheadlines.R
 import com.vdcodeassociate.newsheadlines.kotlin.adapter.ArticleAdapter
@@ -27,6 +28,16 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         viewModel = (activity as NewsActivity).viewModel
 
         setupRecyclerView()
+
+        articleAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("article",it)
+            }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_webViewFragment,
+                bundle
+            )
+        }
 
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
