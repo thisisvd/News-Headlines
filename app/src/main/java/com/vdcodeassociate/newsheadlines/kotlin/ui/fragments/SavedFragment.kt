@@ -10,27 +10,37 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.vdcodeassociate.newsheadlines.R
+import com.vdcodeassociate.newsheadlines.databinding.FragmentHomeBinding
+import com.vdcodeassociate.newsheadlines.databinding.FragmentSavedBinding
 import com.vdcodeassociate.newsheadlines.kotlin.adapter.ArticleAdapter
 import com.vdcodeassociate.newsheadlines.kotlin.ui.NewsActivity
 import com.vdcodeassociate.newsheadlines.kotlin.viewModel.NewsViewModel
-import kotlinx.android.synthetic.main.fragment_saved.*
-import kotlinx.android.synthetic.main.fragment_search.*
 
 class SavedFragment: Fragment(R.layout.fragment_saved) {
 
+    // viewModel
     lateinit var viewModel: NewsViewModel
 
+    // Adapter
     lateinit var articleAdapter: ArticleAdapter
 
+    // TAG
     val TAG = "SearchFragment"
+
+    // viewBinding
+    lateinit var binding: FragmentSavedBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSavedBinding.bind(view)
 
+        // viewModel Implementation
         viewModel = (activity as NewsActivity).viewModel
 
+        // Calling Recycler View
         setupRecyclerView()
 
+        // Set Up adapter
         articleAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article",it)
@@ -68,18 +78,20 @@ class SavedFragment: Fragment(R.layout.fragment_saved) {
         }
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
-            attachToRecyclerView(newsSavedRecyclerView)
+            attachToRecyclerView(binding.newsSavedRecyclerView)
         }
 
+        // Set up response from view model with recycler adapter
         viewModel.getSavedArticles().observe(viewLifecycleOwner, Observer { articles ->
             articleAdapter.differ.submitList(articles)
         })
 
     }
 
+    // Set Up Recycler View
     private fun setupRecyclerView(){
         articleAdapter = ArticleAdapter()
-        newsSavedRecyclerView.apply {
+        binding.newsSavedRecyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(activity)
         }

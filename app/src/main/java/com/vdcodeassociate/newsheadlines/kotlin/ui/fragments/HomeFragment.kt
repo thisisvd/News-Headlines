@@ -8,27 +8,37 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vdcodeassociate.newsheadlines.R
+import com.vdcodeassociate.newsheadlines.databinding.FragmentHomeBinding
 import com.vdcodeassociate.newsheadlines.kotlin.adapter.ArticleAdapter
 import com.vdcodeassociate.newsheadlines.kotlin.ui.NewsActivity
 import com.vdcodeassociate.newsheadlines.kotlin.util.Resource
 import com.vdcodeassociate.newsheadlines.kotlin.viewModel.NewsViewModel
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment: Fragment(R.layout.fragment_home) {
 
+    // viewModel
     lateinit var viewModel: NewsViewModel
 
+    // Adapter
     lateinit var articleAdapter: ArticleAdapter
 
+    // TAG
     val TAG = "HomeFragment"
+
+    // viewBinding
+    lateinit var binding: FragmentHomeBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
 
+        // viewModel Implementation
         viewModel = (activity as NewsActivity).viewModel
 
+        // Calling Recycler View
         setupRecyclerView()
 
+        // Set Up adapter
         articleAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article",it)
@@ -39,6 +49,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             )
         }
 
+        // Set up response from view model with recycler adapter
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success -> {
@@ -62,16 +73,17 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     }
 
     private fun hideProgressBar(){
-        paginationProgressBar.visibility = View.INVISIBLE
+        binding.paginationProgressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar(){
-        paginationProgressBar.visibility = View.INVISIBLE
+        binding.paginationProgressBar.visibility = View.INVISIBLE
     }
 
+    // Set Up Recycler View
     private fun setupRecyclerView(){
         articleAdapter = ArticleAdapter()
-        newsRecyclerView.apply {
+        binding.newsRecyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(activity)
         }

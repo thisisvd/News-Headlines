@@ -9,12 +9,13 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vdcodeassociate.newsheadlines.R
+import com.vdcodeassociate.newsheadlines.databinding.FragmentSavedBinding
+import com.vdcodeassociate.newsheadlines.databinding.FragmentSearchBinding
 import com.vdcodeassociate.newsheadlines.kotlin.adapter.ArticleAdapter
 import com.vdcodeassociate.newsheadlines.kotlin.constants.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import com.vdcodeassociate.newsheadlines.kotlin.ui.NewsActivity
 import com.vdcodeassociate.newsheadlines.kotlin.util.Resource
 import com.vdcodeassociate.newsheadlines.kotlin.viewModel.NewsViewModel
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -22,19 +23,29 @@ import kotlinx.coroutines.launch
 
 class SearchFragment: Fragment(R.layout.fragment_search) {
 
+    // viewModel
     lateinit var viewModel: NewsViewModel
 
+    // Adapter
     lateinit var articleAdapter: ArticleAdapter
 
+    // TAG
     val TAG = "SearchFragment"
+
+    // viewBinding
+    lateinit var binding: FragmentSearchBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSearchBinding.bind(view)
 
+        // viewModel Implementation
         viewModel = (activity as NewsActivity).viewModel
 
+        // Calling Recycler View
         setupRecyclerView()
 
+        // Set Up adapter
         articleAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
                 putSerializable("article",it)
@@ -47,18 +58,21 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
 
         // delay in request
         var job: Job? = null
-        newsSearchEditText.addTextChangedListener { editable ->
-            job?.cancel()
-            job = MainScope().launch {
-                delay(SEARCH_NEWS_TIME_DELAY)
-                editable?.let {
-                    if(editable.toString().isNotEmpty()){
-                        viewModel.getSearchNews(editable.toString())
+        binding.apply {
+            newsSearchEditText.addTextChangedListener { editable ->
+                job?.cancel()
+                job = MainScope().launch {
+                    delay(SEARCH_NEWS_TIME_DELAY)
+                    editable?.let {
+                        if (editable.toString().isNotEmpty()) {
+                            viewModel.getSearchNews(editable.toString())
+                        }
                     }
                 }
             }
         }
 
+        // Set up response from view model with recycler adapter
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
             when(response){
                 is Resource.Success -> {
@@ -82,16 +96,17 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
     }
 
     private fun hideProgressBar(){
-        paginationProgressBar.visibility = View.INVISIBLE
+        binding.paginationProgressBar.visibility = View.INVISIBLE
     }
 
     private fun showProgressBar(){
-        paginationProgressBar.visibility = View.INVISIBLE
+        binding.paginationProgressBar.visibility = View.INVISIBLE
     }
 
+    // Set Up Recycler View
     private fun setupRecyclerView(){
         articleAdapter = ArticleAdapter()
-        newsSearchRecyclerView.apply {
+        binding.newsSearchRecyclerView.apply {
             adapter = articleAdapter
             layoutManager = LinearLayoutManager(activity)
         }

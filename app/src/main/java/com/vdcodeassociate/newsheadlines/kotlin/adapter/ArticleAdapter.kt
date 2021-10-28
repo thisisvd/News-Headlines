@@ -1,5 +1,6 @@
 package com.vdcodeassociate.newsheadlines.kotlin.adapter
 
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +12,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.vdcodeassociate.newsheadlines.R
+import com.vdcodeassociate.newsheadlines.databinding.NewsCardViewBinding
 import com.vdcodeassociate.newsheadlines.kotlin.model.Article
 import com.vdcodeassociate.newsheadlines.kotlin.util.Utils
-import kotlinx.android.synthetic.main.news_card_view.view.*
 
 class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewModel>() {
 
     // ViewHolder inner class
-    inner class ArticleViewModel(itemView: View): RecyclerView.ViewHolder(itemView)
+    inner class ArticleViewModel(val binding: NewsCardViewBinding): RecyclerView.ViewHolder(binding.root)
 
     // Diff Util call back
     private val differCallback = object : DiffUtil.ItemCallback<Article>() {
@@ -38,11 +39,7 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewModel>() {
     // Recycler Components
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewModel {
         return ArticleViewModel(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.news_card_view,
-                parent,
-                false
-            )
+            NewsCardViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
@@ -55,21 +52,22 @@ class ArticleAdapter: RecyclerView.Adapter<ArticleAdapter.ArticleViewModel>() {
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL)
         requestOptions.centerCrop()
 
-        holder.itemView.apply {
-            Glide.with(this)
+        holder.binding.apply {
+            Glide.with(root)
                 .load(article.urlToImage)
                 .apply(requestOptions)
                 .transition(DrawableTransitionOptions.withCrossFade())
-                .into(news_image)
-            news_title.text = article.title
-            news_publishedAt.text = Utils.DateFormat(article.publishedAt)
-            news_time.text = Utils.DateFormat(article.publishedAt)
+                .into(newsImage)
+            newsTitle.text = article.title
+            newsPublishedAt.text = Utils.DateFormat(article.publishedAt)
+            newsTime.text = Utils.DateFormat(article.publishedAt)
 
-            setOnClickListener {
+            root.setOnClickListener {
                 onItemClickListener?.let { it(article) }
             }
 
         }
+
     }
 
     override fun getItemCount(): Int {
